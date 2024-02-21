@@ -1,0 +1,61 @@
+<div class="bg">
+<div class="topnav" id="myTopnav">
+    <a  class="active">TO-DO-LIST</a>
+    <a>Welcome !</a>
+
+    <form class ="split">
+        <button id="logout" (click)="logout()" type="button" >Logout</button>
+    </form>
+  </div>
+  <div class="container">
+    <div class="add">
+    <div class="add-todo-form">
+        <h2>Add Todo</h2>
+        <form id="todoForm">
+            <label for="title">Title:</label>
+            <input type="text" id="titleInput" name="title" required [(ngModel)]="titleInput">
+
+            <label for="description">Description:</label>
+            <input id="descriptionInput" name="descriptionI" required [(ngModel)]="descriptionInput">
+
+            <label for="date">Date:</label>
+            <input type="date" id="dateInput" name="date" required [(ngModel)]="dateInput">
+
+            <button (click)="addTodo()"   type="submit">Add Todo</button>
+        </form>
+    </div>
+</div>
+
+    <div class="todo-table">
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search Todos" (input)="onSearchInput($event)">
+           
+        </div>
+        <div  class="scroll">
+        <table >
+            <thead>
+                <tr>
+                    <th>Sno</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody class="todo-cards">
+               <tr *ngFor="let todo of filteredTodos; let i=index">
+            <td>{{i+1}}</td>
+            <td>{{todo.title}} </td>
+            <td>{{todo.description}} </td>
+            <td>{{todo.date | date:'yyyy-MM-dd' }}  </td>
+            <td>
+                <button  (click)="deleteTodo(i)" class="btn-danger"> Delete</button>
+            </td>
+
+        </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+</div>

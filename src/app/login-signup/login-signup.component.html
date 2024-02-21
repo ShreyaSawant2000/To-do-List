@@ -1,0 +1,47 @@
+<section>
+    <div class="imgBx">
+        <img src="assets/images/image.jpg">
+    </div>
+    <div class="contentBx">
+       
+            <div class="form-box">
+               
+                 <div class="button-box">
+                    <div id="btn"></div>
+                    <button class="toggle-btn" type="button" (click)="toggleForm('login')" [ngClass]="{'active': activeForm === 'login'}">Log In</button>
+                    <button class="toggle-btn" type="button" (click)="toggleForm('signup')" [ngClass]="{'active': activeForm === 'signup'}">Sign Up</button>
+                  </div>
+                  
+                <div class="social-text">
+                    <h2 id="formTitle">{{ formTitle }}</h2>
+                </div>
+                <form  id ="login" *ngIf="showLoginForm"  #loginForm="ngForm" class="input-group">
+                  <input type="email" name="email1" placeholder="Enter Email"   class="input-field" [(ngModel)]="loginObj.email" required pattern="[a-zA-Z0-9._%+-]+@ril+\.com">
+                  <p id="eml">We'll never share your email with anyone else</p>
+                  <div *ngIf="loginForm.controls['email1']?.hasError('pattern')" style="color: red;">Please enter a valid email address</div>
+                  <input type="password" name="password1" placeholder="Enter Password"   class="input-field" [(ngModel)]="loginObj.password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+                  <div *ngIf="loginForm.controls['password1']?.hasError('pattern')" style="color: red;">Password must contain 8 character</div>
+                  
+                  <button [disabled]="loginForm.invalid" (click)="onLogin()" [routerLink]="['/todo']" type="submit" class="submit-btn ">Login</button>
+                  <div class="inputBx">
+                    <p>Don't have an account? <a href='#' (click)="toggleForm('signup')">Sign Up</a></p>
+                </div>
+                </form>
+          
+            <form id="signup" *ngIf="!showLoginForm" #signupForm="ngForm" (submit)="onSignUp()"   class="input-group">
+                  <input type="text" name="text" placeholder="Enter Username"  required class="input-field" [(ngModel)]="signupObj.username" required>
+                  <input type="email" placeholder="Enter Email"  required class="input-field" [(ngModel)]="signupObj.email" name="email" required pattern="[a-zA-Z0-9._%+-]+@ril+\.com">
+                  <div *ngIf="signupForm.controls['email']?.hasError('pattern')" style="color: red;">Please enter a valid email address</div>
+                  <input type="password" placeholder="Enter Password"  required class="input-field" [(ngModel)]="signupObj.password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+                  <div *ngIf="signupForm.controls['password']?.hasError('pattern')" style="color: red;">Password must contain 8 chars</div>
+                  <button type="submit" class="submit-btn " [disabled]="signupForm.invalid">Signup</button>
+                  <div class="inputBx">
+                    <p>Already have an account? <a href='#' (click)="toggleForm('login')">Log In</a></p>
+                </div>
+            </form>
+              </div>
+          
+        </div>
+  
+
+</section>
